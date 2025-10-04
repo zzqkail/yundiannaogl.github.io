@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>云电脑管理员注册-QQ注册</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #12c2e9, #c471ed, #f64f59);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .mobile-container {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .qq-login-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+        }
+        
+        .login-header {
+            background: #0495f9;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+            position: relative;
+        }
+        
+        .logo {
+            width: 70px;
+            height: 70px;
+            background: white;
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo i {
+            color: #0495f9;
+            font-size: 40px;
+        }
+        
+        .login-header h1 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .login-header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .login-tabs {
+            display: flex;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 18px 0;
+            font-size: 16px;
+            extreme: #666;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .tab.active {
+            color: #0495f9;
+            font-weight: 500;
+        }
+        
+       极 tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 3px;
+            background: #049极f9;
+            border-radius: 3px;
+        }
+        
+        .tab-content {
+            padding: 25px 20px;
+        }
+        
+        .login-form {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .input-group {
+            margin-bottom: 10px;
+            position: relative;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 16px 20px 16px 50px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+        
+        .input-group input:focus {
+            border-color: #0495f9;
+            outline: none;
+        }
+        
+        .input-group i {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            font-size: 18px;
+        }
+        
+        .key-validation {
+            margin-top: 5px;
+            margin-bottom: 15px;
+            font-size: 13px;
+            padding: 5px 10px;
+            border-radius: 4px;
+            display: none;
+        }
+        
+        .key-validation.correct {
+            color: #52c41a;
+            background-color: #f6ffed;
+            border: 1px solid #b7eb8f;
+            display: block;
+        }
+        
+        .key-validation.incorrect {
+            color: #f64f59;
+            background-color: #fff2f0;
+            border: 1px solid #ffccc7;
+            display: block;
+        }
+        
+        .qq-validation {
+            margin-top: 5px;
+            margin-bottom: 15px;
+            font-size: 13px;
+            padding: 5px 10px;
+            border-radius: 4px;
+            display: none;
+        }
+        
+        .qq-validation.error {
+            color: #f64f59;
+            background-color: #fff2f0;
+            border: 1px solid #ffccc7;
+            display: block;
+        }
+        
+        .options {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+            font-size: 15px;
+            color: #666;
+        }
+        
+        .remember {
+            display: flex;
+            align-items: center;
+        }
+        
+        .remember input {
+            margin-right: 8px;
+            width: 18px;
+            height极 18px;
+            accent-color: #0495f9;
+        }
+        
+        .forgot {
+            color: #0495f9;
+            text-decoration: none;
+        }
+        
+        .login-btn {
+            background: #0495f9;
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 8px;
+            font-size: 17px;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        
+        .login-btn:hover {
+            background: #0385e0;
+        }
+        
+        .register {
+            text-align: center;
+            margin-top: 10px;
+        }
+        
+        .register a {
+            color: #0495f9;
+            text-decoration: none;
+            font-size: 15px;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .register a i {
+            margin-right: 5px;
+        }
+        
+        .login-footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 13px;
+            color: #999;
+            padding: 0 15px 15px;
+        }
+        
+        .login-footer a {
+            color: #0495f9;
+            text-decoration: none;
+            margin: 0 8px;
+        }
+        
+        .safe-tip {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 15px;
+            color: #999;
+            font-size: 13px;
+        }
+        
+        .safe-tip i {
+            margin-right: 5px;
+            color: #52c41a;
+        }
+        
+        /* 弹窗样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 400px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            animation: slideIn 0.3s;
+        }
+        
+        .modal-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+        
+        .success .modal-icon {
+            color: #52c41极;
+        }
+        
+        .error .modal-icon {
+            color: #f64f59;
+        }
+        
+        .modal-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .modal-message {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+        
+        .modal-button {
+            background: #0495f9;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 极.3s;
+        }
+        
+        .modal-button:hover {
+            background: #0385e0;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        /* 移动端适配 */
+        @media (max-width: 480px) {
+            .qq-login-card {
+                border-radius: 12px;
+            }
+            
+            .login-header {
+                padding: 25px 15px;
+            }
+            
+            .tab {
+                padding: 16px 0;
+                font-size: 15px;
+            }
+            
+            .tab-content {
+                padding: 20px 15px;
+            }
+            
+            .input-group input {
+                padding: 14px 15px 14px 45px;
+            }
+            
+            .modal-content {
+                padding: 20px;
+            }
+            
+            .modal-icon {
+                font-size: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="mobile-container">
+        <div class="qq-login-card">
+            <div class="login-header">
+                <div class="logo">
+                    <i class="fab fa-qq"></i>
+                </div>
+                <h1>云电脑-管理员注册</h1>
+                <p>管理员专属连接ip:117.24.15.114</p>
+            </div>
+            
+            <div class="login-tabs">
+                <div class="tab active">管理员注册</div>
+            </div>
+            
+            <div class="tab-content">
+                <div class="login-form">
+                    <div class="input-group">
+                        <i class="fas fa-key"></i>
+                        <input type="text" id="secret-key" placeholder="请输入管理员申请资格秘钥">
+                    </div>
+                    <div class="key-validation" id="key-validation-message"></div>
+                    
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="qq-number" placeholder="QQ号(账号和密码找群主要)">
+                    </div>
+                    <div class="qq-validation" id="qq-validation-message"></div>
+                    
+                    <div class="options">
+                        <label class="remember">
+                            <input type="checkbox" checked> 记住密码
+                        </label>
+                        <a href="#" class="forgot">没有电脑?</a>
+                    </div>
+                    
+                    <button class="login-btn" id="register-btn">注册</button>
+                    
+                    <div class="register">
+                        <a href="#"><i class="fas fa-plus"></i>这里不知道写什么</a>
+                    </div>
+                    
+                    <div class="safe-tip">
+                        <i class="fas fa-shield-alt"></i> 不安全注册，账号会泄露😂
+                    </div>
+                </div>
+            </div>
+            
+            <div class="login-footer">
+                <a href="#">反馈问题</a> • 
+                <a href="#">隐私保护</a> • 
+                <a href="#">免责声明</a>
+                <p>© 2024 - 2025 Tencent Inc. All Rights Reserved</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 成功弹窗 -->
+    <div class="modal success" id="success-modal">
+        <div class="modal-content">
+            <div class="modal-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2 class="modal-title">注册成功</h2>
+            <p class="modal-message">您的管理员云电脑已申请，请等待审核。</p>
+            <button class="modal-button" onclick="closeModal('success-modal')">确定审核完成之后会有人加你QQ</button>
+        </div>
+    </div>
+    
+    <!-- 失败弹窗 -->
+    <div class="modal error" id="error-modal">
+        <div class="modal-content">
+            <div class="modal-icon">
+                <i class="fas fa-times-circle"></i>
+            </div>
+            <h2 class="modal-title">注册失败</h2>
+            <p class="modal-message">请在电脑或其他云电脑上完成注册。</p>
+            <button class="modal-button" onclick="closeModal('error-modal')">确定</极button>
+        </div>
+    </div>
+    
+    <!-- 验证错误弹窗 -->
+    <div class="modal error" id="validation-error-modal">
+        <div class="modal-content">
+            <div class="modal-icon">
+                <i class="fas fa-exclamation-circle"></i>
+            </div>
+            <h2 class="modal-title">输入不完整</h2>
+            <p class="modal-message" id="validation-error-message">请检查您的输入</p>
+            <button class="modal-button" onclick="closeModal('validation-error-modal')">确定</button>
+        </div>
+    </div>
+
+    <script>
+        // 获取秘钥输入框和验证消息元素
+        const secretKeyInput = document.getElementById('secret-key');
+        const keyValidationMessage = document.getElementById('key-validation-message');
+        const qqInput = document.getElementById('qq-number');
+        const qqValidationMessage = document.getElementById('qq-validation-message');
+        
+        // 监听秘钥输入事件
+        secretKeyInput.addEventListener('input', function() {
+            const key = this.value.trim();
+            
+            if (key === '') {
+                // 如果输入为空，隐藏验证消息
+                keyValidationMessage.className = 'key-validation';
+                keyValidationMessage.textContent = '';
+            } else if (key === '114514') {
+                // 如果秘钥正确
+                keyValidationMessage.className = 'key-validation correct';
+                keyValidationMessage.innerHTML = '<i class="fas fa-check-circle"></i> 秘钥正确';
+            } else {
+                // 如果秘钥错误
+                keyValidationMessage.className = 'key-validation incorrect';
+                keyValidationMessage.innerHTML = '<i class="fas fa-exclamation-circle"></i> 管理员秘钥错误';
+            }
+        });
+        
+        // 监听QQ号输入事件
+        qqInput.addEventListener('input', function() {
+            const qq = this.value.trim();
+            
+            if (qq === '') {
+                // 如果输入为空，隐藏验证消息
+                qqValidationMessage.className = 'qq-validation';
+                qqValidationMessage.textContent = '';
+            } else {
+                // 如果有输入，验证QQ号格式
+                if (/^[1-9][0-9]{4,11}$/.test(qq)) {
+                    qqValidationMessage.className = 'qq-validation';
+                    qqValidationMessage.textContent = '';
+                } else {
+                    qqValidationMessage.className = 'qq-validation error';
+                    qqValidationMessage.innerHTML = '<i class="fas fa-exclamation-circle"></i> QQ号格式不正确';
+                }
+            }
+        });
+        
+        // 获取注册按钮
+        const registerBtn = document.getElementById('register-btn');
+        
+        // 添加点击事件监听器
+        registerBtn.addEventListener('click', function() {
+            const key = secretKeyInput.value.trim();
+            const qq = qqInput.value.trim();
+            
+            // 验证输入是否完整
+            if (key === '' && qq === '') {
+                showValidationError('请输入管理员秘钥和你的QQ号');
+                return;
+            }
+            
+            if (key === '') {
+                showValidationError('请输入管理员秘钥');
+                return;
+            }
+            
+            if (qq === '') {
+                showValidationError('请输入QQ号');
+                return;
+            }
+            
+            // 如果秘钥不正确
+            if (key !== '114514') {
+                showValidationError('管理员秘钥错误，请检查后重试');
+                return;
+            }
+            
+            // 检测设备类型
+            const isMobile = /iPhone|iPad|iPod|Android|webOS|BlackBerry|Windows Phone/i.test(navigator.userAgent);
+            
+            if (isMobile) {
+                // 如果是手机，显示失败提示
+                showModal('error-modal');
+            } else {
+                // 如果是电脑，显示成功提示
+                showModal('success-modal');
+            }
+        });
+        
+        // 显示验证错误弹窗
+        function showValidationError(message) {
+            document.getElementById('validation-error-message').textContent = message;
+            showModal('validation-error-modal');
+        }
+        
+        // 显示弹窗函数
+        function showModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+        }
+        
+        // 关闭弹窗函数
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+        
+        // 点击弹窗外部也可关闭
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        };
+    </script>
+</body>
+</html>
